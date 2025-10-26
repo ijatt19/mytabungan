@@ -1,6 +1,6 @@
-# Tabung — Aplikasi Manajemen Tabungan
-
 ## Izzat Fakhar Assyakur - 221011400803 - 07TPLP020
+
+# Tabung — Aplikasi Manajemen Tabungan
 
 Aplikasi web sederhana untuk mengelola tabungan pribadi, termasuk kategori tabungan, transaksi pemasukan/pengeluaran, serta ringkasan di dashboard. Mendukung autentikasi pengguna (login/register) dan pengelolaan profil.
 
@@ -54,3 +54,4 @@ Berikut beberapa tampilan utama aplikasi:
 ## Lisensi
 
 Proyek ini untuk keperluan belajar/personal.
+
