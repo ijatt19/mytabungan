@@ -1,0 +1,426 @@
+:root {
+  --primary-color: #16a34a; /* Warna hijau utama baru */
+  --secondary-color: #50e3c2; /* A fresh teal/mint */
+  --success-color: #28a745; /* Bootstrap's default green for consistency */
+  --danger-color: #dc3545; /* Bootstrap's default red */
+  --warning-color: #ffc107; /* Bootstrap's default yellow */
+  --light-color: #f7f9fc; /* A very light blue-gray for the background */
+  --dark-color: #242a38; /* A dark, slightly blueish color for text */
+  --text-muted: #6c757d;
+  --card-bg: #ffffff;
+  --card-border-color: #eaecef;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.07),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --font-family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background-color: #f8fafc; /* Sesuai permintaan */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: var(--font-family-sans-serif);
+  color: var(--dark-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border-color);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-md);
+  overflow: hidden; /* Ensures child elements respect the rounded corners */
+}
+
+.card-header {
+  background-color: var(--card-bg);
+  border-bottom: 1px solid var(--card-border-color);
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0.5rem;
+  border: 1px solid var(--card-border-color);
+  padding: 0.6rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  outline: none;
+}
+
+/* Modern Form Style for Add/Edit Pages */
+.form-control-modern {
+  border-radius: 0.75rem !important;
+  box-shadow: var(--shadow-sm) !important;
+  border: 1px solid transparent !important;
+  background-color: #f8fafc !important; /* Sedikit lebih gelap dari background body */
+  padding: 0.75rem 1rem !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-control-modern:focus {
+  background-color: var(--card-bg) !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15), var(--shadow-sm) !important;
+}
+
+.btn {
+  border-radius: 0.5rem;
+  font-weight: 500;
+  padding: 0.6rem 1.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-interactive:hover {
+  transform: scale(1.02);
+}
+
+.card-interactive {
+  transition: all 0.2s ease-in-out;
+}
+.card-interactive:hover {
+  box-shadow: var(--shadow-md) !important;
+}
+.btn-success {
+  background-color: #10b981; /* A modern, bright green */
+  border-color: #10b981;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: #059669;
+  border-color: #059669;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.btn-outline-warning {
+  color: #f59e0b;
+  border-color: #f59e0b;
+}
+.btn-outline-warning:hover {
+  background-color: #f59e0b;
+  color: #fff;
+}
+
+.btn-outline-danger {
+  color: #ef4444;
+  border-color: #ef4444;
+}
+.btn-outline-danger:hover {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.table thead th {
+  background-color: transparent; /* Dibuat transparan karena parent (thead) sudah punya bg-light */
+  border-bottom: 1px solid var(--card-border-color);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.table tbody td {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+}
+
+.table-hover tbody tr {
+  transition: background-color 0.15s ease-in-out;
+  border-bottom: 1px solid var(--card-border-color); /* Garis bawah antar baris */
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f5f9; /* A soft blue on hover */
+  box-shadow: var(--shadow-sm);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none; /* Hilangkan border untuk baris terakhir */
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.4em 0.8em;
+  border-radius: 0.5rem;
+}
+
+.text-success {
+  color: #10b981 !important;
+}
+.text-danger {
+  color: #ef4444 !important;
+}
+
+.bg-success-subtle {
+  background-color: #d1fae5 !important;
+}
+.text-success-emphasis {
+  color: #065f46 !important;
+}
+
+.bg-danger-subtle {
+  background-color: #fee2e2 !important;
+}
+.text-danger-emphasis {
+  color: #991b1b !important;
+}
+
+.badge-pemasukan {
+  background-color: #dcfce7; /* Green-100 */
+  color: #166534; /* Green-800 */
+  font-weight: 500;
+  padding: 0.4em 0.8em;
+  border-radius: 9999px;
+}
+
+.badge-pengeluaran {
+  background-color: #fee2e2; /* Red-100 */
+  color: #991b1b; /* Red-800 */
+  font-weight: 500;
+  padding: 0.4em 0.8em;
+  border-radius: 9999px;
+}
+
+.bg-light-green {
+  background-color: #dcfce7 !important;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.empty-state h5 {
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  max-width: 400px;
+  margin: 0.5rem auto 0;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  list-style: none;
+}
+
+.pagination .page-item .page-link {
+  color: var(--primary-color);
+  border: 1px solid var(--card-border-color);
+  margin: 0 2px;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #f1f5f9;
+  border-color: var(--primary-color);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+  z-index: 1;
+}
+
+.pagination .page-item.disabled .page-link {
+  color: var(--text-muted);
+  pointer-events: none;
+  background-color: var(--card-bg);
+  border-color: var(--card-border-color);
+}
+
+/* Card Dashboard */
+.summary-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(
+    --shadow-lg
+  ); /* Anda mungkin perlu mendefinisikan --shadow-lg */
+}
+
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.75rem;
+}
+
+.bg-primary-subtle {
+  background-color: #e7f0fe !important;
+}
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.btn-action {
+  border-radius: 0.5rem;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* --- Sidebar Modern Style --- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind navbar, if any */
+  padding: 0;
+  box-shadow: var(--shadow-sm);
+  background-color: #f8f9fa; /* Warna abu muda */
+  border-right: 1px solid var(--card-border-color);
+}
+
+main {
+  margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
+  flex-grow: 1; /* Membuat konten utama mengisi ruang yang tersedia */
+}
+
+.sidebar .position-sticky {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Tinggi penuh */
+}
+
+.sidebar-header {
+  color: var(--dark-color);
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+.sidebar-header:hover {
+  background-color: #f1f5f9;
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #334155; /* Warna teks menu */
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  margin: 0.25rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar .nav-link i {
+  font-size: 1.1rem;
+  line-height: 0;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #e2e8f0; /* Efek hover abu-abu */
+  color: #1e293b;
+}
+
+.sidebar .nav-link.active {
+  background-color: #198754; /* Warna hijau aktif */
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar .nav-link.active i {
+  color: #fff;
+}
+
+.sidebar-footer {
+  padding-bottom: 1rem;
+}
+
+.sidebar-footer .nav-link {
+  font-size: 0.95rem;
+}
+
+/* --- Transaction List Style (Dashboard) --- */
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Jarak antar item */
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 0.75rem; /* Radius besar */
+  transition: all 0.2s ease-in-out;
+}
+
+.transaction-item:hover {
+  background-color: #f8fafc; /* Warna hover lembut */
+  transform: scale(1.02); /* Animasi hover ringan */
+  box-shadow: var(--shadow-sm);
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
