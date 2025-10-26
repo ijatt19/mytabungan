@@ -44,7 +44,7 @@ Berikut beberapa tampilan utama aplikasi:
   ![Kategori](img/Kategorii.png)
 
 - Transaksi
-  ![Transaksi](img/Transakssi.png)
+  ![Transaksi](img/Transaksi.png)
 
 - Profil
   ![Profil](img/Profile.png)
