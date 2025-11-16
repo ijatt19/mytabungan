@@ -1,52 +1,44 @@
-// Skrip global untuk aplikasi
-
-// Fungsi untuk menampilkan toast sukses
-function showSuccessToast(message) {
-  const toastEl = document.getElementById("successToast");
-  const toastBody = document.getElementById("successToastBody");
-  toastBody.textContent = message;
-  const toast = new bootstrap.Toast(toastEl);
-  toast.show();
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-  // Handle konfirmasi modal dinamis
+  // Inisialisasi semua tooltip
+  const tooltipTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  );
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+
+  // Logika untuk modal konfirmasi
   const konfirmasiModal = document.getElementById("konfirmasiModal");
   if (konfirmasiModal) {
     konfirmasiModal.addEventListener("show.bs.modal", function (event) {
-      const button = event.relatedTarget; // Tombol yang memicu modal
-      const url = button.getAttribute("data-url"); // Ambil URL dari atribut data-url
-
-      const konfirmasiBtn = konfirmasiModal.querySelector(
-        "#konfirmasiModalButton"
-      );
-      konfirmasiBtn.setAttribute("href", url); // Set URL ke tombol 'Hapus' di modal
-    });
-  }
-
-  // Handle konfirmasi untuk form submit
-  const formKonfirmasiModal = document.getElementById("formKonfirmasiModal");
-  if (formKonfirmasiModal) {
-    const konfirmasiBtn = formKonfirmasiModal.querySelector(
-      "#formKonfirmasiButton"
-    );
-    let formToSubmit = null;
-
-    // Cari semua form dengan atribut data-confirm
-    document.querySelectorAll('form[data-confirm="true"]').forEach((form) => {
-      form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Cegah submit langsung
-        formToSubmit = this; // Simpan form yang akan di-submit
-        const modal = new bootstrap.Modal(formKonfirmasiModal);
-        modal.show();
-      });
-    });
-
-    // Tambahkan event listener ke tombol konfirmasi di dalam modal
-    konfirmasiBtn.addEventListener("click", function () {
-      if (formToSubmit) {
-        formToSubmit.submit(); // Submit form yang sudah disimpan
+      const button = event.relatedTarget;
+      const url = button.getAttribute("data-url");
+      const form = konfirmasiModal.querySelector("#formKonfirmasi");
+      if (form) {
+        form.action = url;
       }
     });
   }
 });
+
+// Fungsi untuk menampilkan toast sukses
+function showSuccessToast(message) {
+  const successToastEl = document.getElementById("successToast");
+  const successToastBody = document.getElementById("successToastBody");
+  if (successToastEl && successToastBody) {
+    successToastBody.textContent = message;
+    const toast = new bootstrap.Toast(successToastEl, { delay: 3000 }); // Sukses 3 detik
+    toast.show();
+  }
+}
+
+// Fungsi untuk menampilkan toast error
+function showErrorToast(message) {
+  const errorToastEl = document.getElementById("errorToast");
+  const errorToastBody = document.getElementById("errorToastBody");
+  if (errorToastEl && errorToastBody) {
+    errorToastBody.textContent = message;
+    const toast = new bootstrap.Toast(errorToastEl, { delay: 1500 }); // Error 1.5 detik
+    toast.show();
+  }
+}

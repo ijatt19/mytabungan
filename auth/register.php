@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/koneksi.php';
-require_once __DIR__ . '/../layout/header.php';
-
+require_once __DIR__ . '/../layout/header_auth.php';
 
 // Jika sudah login, lempar ke index.php
 if (isset($_SESSION['id_pengguna'])) {
@@ -12,28 +11,27 @@ if (isset($_SESSION['id_pengguna'])) {
 // Logika PHP untuk Pendaftaran
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $nama_lengkap = $_POST['nama_lengkap'];
+    $nama_lengkap = trim($_POST['nama_lengkap']);
 
-    if (empty($username) || empty($password) || empty($nama_lengkap)) {
+    if (empty($email) || empty($password) || empty($nama_lengkap)) {
         $_SESSION['pesan_error'] = "Semua kolom wajib diisi.";
         header('Location: register.php');
         exit;
     } else {
         try {
-            $stmt_cek = $pdo->prepare("SELECT id_pengguna FROM pengguna WHERE username = ?");
-            $stmt_cek->execute([$username]);
+            $stmt_cek = $pdo->prepare("SELECT id_pengguna FROM pengguna WHERE email = ?");
+            $stmt_cek->execute([$email]);
             
             if ($stmt_cek->fetch()) {
-                $_SESSION['pesan_error'] = "Username '$username' sudah terdaftar.";
+                $_SESSION['pesan_error'] = "Email '$email' sudah terdaftar.";
                 header('Location: register.php');
                 exit;
             } else {
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                
-                $stmt_insert = $pdo->prepare("INSERT INTO pengguna (username, password, nama_lengkap) VALUES (?, ?, ?)");
-                $stmt_insert->execute([$username, $hashed_password, $nama_lengkap]);
+                $stmt_insert = $pdo->prepare("INSERT INTO pengguna (email, password, nama_lengkap) VALUES (?, ?, ?)");
+                $stmt_insert->execute([$email, $hashed_password, $nama_lengkap]);
                 
                 $_SESSION['pesan_sukses'] = 'Pendaftaran berhasil! Silakan login.';
                 header('Location: login.php');
@@ -64,8 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="text" class="form-control form-control-modern" id="nama_lengkap" name="nama_lengkap" required>
                         </div>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control form-control-modern" id="username" name="username" required>
+                            <label for="email" class="form-label">Alamat Email</label>
+                            <input type="email" class="form-control form-control-modern" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>

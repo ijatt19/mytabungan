@@ -223,6 +223,19 @@ h6 {
   background-color: #dcfce7 !important;
 }
 
+.bg-warning-subtle {
+  background-color: #fffbeb !important;
+}
+.text-warning-emphasis {
+  color: #b45309 !important;
+}
+.bg-info-subtle {
+  background-color: #eff6ff !important;
+}
+.text-info-emphasis {
+  color: #1d4ed8 !important;
+}
+
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
@@ -327,7 +340,7 @@ h6 {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 100; /* Behind navbar, if any */
+  z-index: 1020; /* Di atas elemen lain */
   padding: 0;
   box-shadow: var(--shadow-sm);
   background-color: #f8f9fa; /* Warna abu muda */
@@ -335,6 +348,7 @@ h6 {
 }
 
 main {
+  position: relative; /* Diperlukan untuk positioning footer */
   margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
   flex-grow: 1; /* Membuat konten utama mengisi ruang yang tersedia */
 }
@@ -424,3 +438,309 @@ main {
   border-radius: 50%;
   font-size: 1.2rem;
 }
+
+.footer {
+  padding-left: 250px; /* Sesuaikan dengan lebar sidebar */
+  z-index: 1019; /* Tepat di bawah sidebar */
+  position: relative;
+}
+
+/* === Redesain Wishlist Card Modern (V2 - Navigasi Refined) === */
+
+/* Menghapus style lama yang mungkin konflik */
+.wishlist-card,
+.dashboard-wishlist-card,
+.wishlist-goal-card,
+.wishlist-item-image {
+  all: unset;
+}
+
+#wishlistCarousel {
+  position: relative;
+}
+
+.wishlist-card-modern {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border: none;
+  /* Add padding at the bottom to make space for the floating controls */
+  padding: 1.25rem 1.25rem 4rem 1.25rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.wishlist-card-modern:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.07);
+}
+
+.wishlist-card-modern .card-body {
+  padding: 0;
+}
+
+.wishlist-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.wishlist-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.wishlist-title-container {
+  flex-grow: 1;
+}
+
+.wishlist-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+  color: #1a202c;
+}
+
+.wishlist-target {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-bottom: 0;
+}
+
+.view-all-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+  line-height: 1.5;
+}
+
+.view-all-link:hover {
+  color: #2d3748;
+}
+
+.progress-container {
+  margin-bottom: 1.5rem;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.progress-percentage {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.progress-modern {
+  height: 12px;
+  border-radius: 999px;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.progress-modern .progress-bar {
+  border-radius: 999px;
+  background: linear-gradient(90deg, #48bb78 0%, #38a169 100%);
+}
+
+.progress-amount {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #718096;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wishlist-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #4a5568;
+  line-height: 1.4;
+}
+
+.stat-item strong {
+  color: #2d3748;
+  font-weight: 600;
+}
+
+/* Carousel Navigation - V2 (Refined) */
+#wishlistCarousel .carousel-controls-container {
+  all: unset; /* Reset the container */
+}
+
+#wishlistCarousel .carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+#wishlistCarousel .carousel-indicators button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #cbd5e0; /* Soft neutral color */
+  border: none;
+  padding: 0;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+#wishlistCarousel .carousel-indicators .active {
+  background-color: #4a5568; /* Darker active color */
+  opacity: 1;
+}
+
+#wishlistCarousel .carousel-control-prev,
+#wishlistCarousel .carousel-control-next {
+  position: absolute;
+  z-index: 15;
+  top: auto;
+  bottom: 12px; /* Align vertically with indicators */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(0) scale(1);
+}
+
+#wishlistCarousel .carousel-control-prev {
+  left: 20px;
+}
+
+#wishlistCarousel .carousel-control-next {
+  right: 20px;
+}
+
+#wishlistCarousel .carousel-control-prev:hover,
+#wishlistCarousel .carousel-control-next:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#wishlistCarousel .carousel-control-prev-icon,
+#wishlistCarousel .carousel-control-next-icon {
+  filter: invert(1) grayscale(100) brightness(0.3);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* Wishlist Filter Tabs */
+.wishlist-filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--card-border-color);
+  margin-bottom: 1.5rem !important;
+}
+
+.filter-tab {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-tab:hover {
+  background-color: #f1f5f9;
+  color: #1a202c;
+}
+
+.filter-tab.active {
+  background-color: #e2e8f0;
+  color: #1a202c;
+  font-weight: 600;
+}
+
+/* === Redesain Wishlist Card Modern (End) === */
+
+/* === Halaman Daftar Wishlist === */
+
+.wishlist-list-card {
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--card-border-color);
+  transition: all 0.2s ease-in-out;
+}
+
+.wishlist-list-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.wishlist-list-card .wishlist-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.wishlist-list-card .wishlist-target {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.wishlist-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border-top: 1px solid var(--card-border-color);
+  padding-top: 1rem;
+}
+
+.badge-prioritas-tinggi {
+  background-color: #fee2e2; /* Red-100 */
+  color: #b91c1c; /* Red-700 */
+  border: 1px solid #fecaca; /* Red-200 */
+}
+
+.badge-prioritas-sedang {
+  background-color: #ffedd5; /* Orange-100 */
+  color: #c2410c; /* Orange-700 */
+  border: 1px solid #fed7aa; /* Orange-200 */
+}
+
+.badge-prioritas-rendah {
+  background-color: #dbeafe; /* Blue-100 */
+  color: #1d4ed8; /* Blue-700 */
+  border: 1px solid #bfdbfe; /* Blue-200 */
+}
+
+.badge[class^="badge-prioritas-"] {
+  font-weight: 500;
+  padding: 0.3em 0.6em;
+  font-size: 0.75rem;
+}
+
+/* === End Halaman Daftar Wishlist === */

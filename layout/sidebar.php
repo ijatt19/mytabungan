@@ -21,6 +21,11 @@
                     <i class="bi bi-tags me-3"></i> Kategori
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link <?php echo (strpos($_SERVER['REQUEST_URI'], '/wishlist/') !== false) ? 'active' : ''; ?>" href="/wishlist/index.php">
+                    <i class="bi bi-gem me-3"></i> Wishlist
+                </a>
+            </li>
         </ul>
 
         <div class="sidebar-footer mt-auto">

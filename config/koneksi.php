@@ -1,10 +1,9 @@
 <?php
-// config/koneksi.php
 
 $host = 'localhost';
-$db   = 'mytabungan';
-$user = 'root'; // Ganti dengan username database kamu
-$pass = '';   // Ganti dengan password database kamu
+$db   = 'tabung_db';
+$user = 'root';
+$pass = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

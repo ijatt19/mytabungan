@@ -36,6 +36,22 @@ try {
     $stmt_recent->execute([$id_pengguna]);
     $recent_transactions = $stmt_recent->fetchAll();
 
+    // Ambil filter prioritas dari URL, defaultnya kosong (tampilkan semua)
+    $priority_filter = $_GET['priority_filter'] ?? '';
+
+    // Ambil data untuk "Impian Terdekat" dengan filter
+    $sql_wishlist = "SELECT * FROM wishlist WHERE id_pengguna = ? AND status = 'Aktif'";
+    $params_wishlist = [$id_pengguna];
+
+    if (!empty($priority_filter)) {
+        $sql_wishlist .= " AND prioritas = ?";
+        $params_wishlist[] = $priority_filter;
+    }
+    $sql_wishlist .= " ORDER BY FIELD(prioritas, 'Tinggi', 'Sedang', 'Rendah'), harga ASC";
+    $stmt_wishlist = $pdo->prepare($sql_wishlist);
+    $stmt_wishlist->execute($params_wishlist);
+    $next_goals = $stmt_wishlist->fetchAll();
+
     require_once __DIR__ . '/includes/chart_data.php';
 
 } catch (PDOException $e) {
@@ -66,109 +82,15 @@ $has_transactions = !empty($recent_transactions);
                 </div>
             <?php else: ?>
 
-            <!-- Summary Cards -->
-            <div class="row g-4 mb-4">
-                <div class="col-md-4">
-                    <div class="card summary-card h-100">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="icon-circle bg-success-subtle text-success">
-                                    <i class="bi bi-arrow-down-short"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <p class="text-muted mb-1">Total Pemasukan</p>
-                                    <h4 class="mb-0">Rp <?php echo number_format($total_pemasukan, 0, ',', '.'); ?></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card summary-card h-100">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="icon-circle bg-danger-subtle text-danger">
-                                    <i class="bi bi-arrow-up-short"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <p class="text-muted mb-1">Total Pengeluaran</p>
-                                    <h4 class="mb-0">Rp <?php echo number_format($total_pengeluaran, 0, ',', '.'); ?></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card summary-card h-100">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="icon-circle bg-primary-subtle text-primary">
-                                    <i class="bi bi-wallet2"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <p class="text-muted mb-1">Saldo Akhir</p>
-                                    <h4 class="mb-0">Rp <?php echo number_format($saldo_akhir, 0, ',', '.'); ?></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php // Memanggil komponen kartu summary
+            require_once __DIR__ . '/dashboard/dashboard_summary_cards.php'; ?>
 
-            <div class="row g-4">
-                <!-- Chart -->
-                <div class="col-lg-8">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            Grafik Transaksi (Bulan Ini)
-                        </div>
-                        <div class="card-body">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
-                </div>
+            <?php // Memanggil komponen carousel wishlist
+            require_once __DIR__ . '/dashboard/dashboard_wishlist_carousel.php'; ?>
 
-                <!-- Recent Transactions -->
-                <div class="col-lg-4">
-                    <div class="card h-100">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <span>Transaksi Terakhir</span>
-                            <a href="transaksi/index.php" class="btn btn-sm btn-outline-secondary">Lihat Semua</a>
-                        </div>
-                        <div class="card-body p-3">
-                            <div class="transaction-list">
-                                <?php foreach ($recent_transactions as $trx): ?>
-                                    <?php
-                                        $isPemasukan = ($trx['tipe'] == 'Pemasukan');
-                                        $iconClass = $isPemasukan ? 'bi-arrow-down' : 'bi-arrow-up';
-                                        $colorClass = $isPemasukan ? 'success' : 'danger';
-                                        $prefix = $isPemasukan ? '+' : '-';
-                                    ?>
-                                    <div class="transaction-item">
-                                        <div class="d-flex align-items-center">
-                                            <div class="transaction-icon bg-<?php echo $colorClass; ?>-subtle text-<?php echo $colorClass; ?>">
-                                                <i class="bi <?php echo $iconClass; ?>"></i>
-                                            </div>
-                                            <div class="ms-3">
-                                                <div class="fw-bold"><?php echo !empty($trx['keterangan']) ? htmlspecialchars($trx['keterangan']) : htmlspecialchars($trx['nama_kategori']); ?></div>
-                                                <small class="text-muted">
-                                                    <?php echo htmlspecialchars($trx['nama_kategori']); ?> ・ <?php echo date('d M', strtotime($trx['tanggal_transaksi'])); ?>
-                                                </small>
-                                            </div>
-                                        </div>
-                                        <div class="fw-bold text-<?php echo $colorClass; ?>">
-                                            <?php echo $prefix; ?>Rp <?php echo number_format($trx['jumlah'], 0, ',', '.'); ?>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                         <div class="card-footer text-center bg-light py-2">
-                            <small class="text-muted">Menampilkan 5 transaksi terakhir</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php // Memanggil komponen konten utama (grafik & transaksi terakhir)
+            require_once __DIR__ . '/dashboard/dashboard_main_content.php'; ?>
+
             <?php endif; ?>
         </main>
     </div>

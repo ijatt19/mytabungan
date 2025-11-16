@@ -1,8 +1,8 @@
 </div>
     </div>
 
-<footer class="footer mt-auto py-3 bg-light border-top" style="z-index: 101;">
-    <div class="container-fluid" style="padding-left: 280px;">
+<footer class="footer mt-auto py-3 bg-light border-top">
+    <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center">
             <span class="text-muted small">&copy; <?php echo date('Y'); ?> MyTabungan. All rights reserved.</span>
             <span class="text-muted small">Dibuat oleh Izzat Fakhar Assyakur | 221011400803 | 07TPLP020</span>
@@ -47,6 +47,15 @@ if (isset($_SESSION['pesan_sukses'])) {
             });
           </script>";
     unset($_SESSION['pesan_sukses']);
+}
+if (isset($_SESSION['pesan_error'])) {
+    $pesan_error = $_SESSION['pesan_error'];
+    echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showErrorToast('{$pesan_error}');
+            });
+          </script>";
+    unset($_SESSION['pesan_error']);
 }
 ?>
 
