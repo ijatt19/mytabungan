@@ -2,21 +2,29 @@
 require_once __DIR__ . '/../config/koneksi.php';
 require_once __DIR__ . '/../layout/header_auth.php';
 
-// Jika sudah login, lempar ke index.php
+// Jika sudah login, lempar ke dashboard
 if (isset($_SESSION['id_pengguna'])) {
-    header("Location: /tabung/index.php");
+    header("Location: ../dashboard.php");
     exit;
 }
 
 // Logika PHP untuk Pendaftaran
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
+    $password_confirm = $_POST['password_confirm'];
     $nama_lengkap = trim($_POST['nama_lengkap']);
 
-    if (empty($email) || empty($password) || empty($nama_lengkap)) {
+    if (empty($email) || empty($password) || empty($password_confirm) || empty($nama_lengkap)) {
         $_SESSION['pesan_error'] = "Semua kolom wajib diisi.";
+        header('Location: register.php');
+        exit;
+    } elseif ($password !== $password_confirm) {
+        $_SESSION['pesan_error'] = "Password dan konfirmasi password tidak cocok.";
+        header('Location: register.php');
+        exit;
+    } elseif (strlen($password) < 6) {
+        $_SESSION['pesan_error'] = "Password minimal 6 karakter.";
         header('Location: register.php');
         exit;
     } else {
@@ -46,38 +54,120 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<div class="auth-page">
+    <!-- Background Decorations -->
+    <div class="auth-decoration auth-decoration-1"></div>
+    <div class="auth-decoration auth-decoration-2"></div>
+    
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100 py-5">
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                <div class="card auth-card border-0 shadow-xl animate-fade-in-up">
+                    <div class="card-body p-4 p-lg-5">
+                        <!-- Logo & Title -->
+                        <div class="text-center mb-4">
+                            <div class="auth-logo mb-3">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+                            <h1 class="h3 fw-bold gradient-text mb-2">Buat Akun Baru</h1>
+                            <p class="text-muted mb-0">Daftar untuk memulai perjalanan finansialmu</p>
+                        </div>
 
-    <div class="row justify-content-center vh-100 align-items-center">
-        <div class="col-md-6 col-lg-5">
-            <div class="card shadow-lg">
-                <div class="card-body p-5">
-                    <div class="text-center mb-4">
-                        <h1 class="h3 fw-bold text-primary">Buat Akun Baru</h1>
-                        <p class="text-muted">Isi form di bawah untuk mendaftar.</p>
-                    </div>                    
+                        <?php if (isset($_SESSION['pesan_error'])): ?>
+                            <div class="alert alert-danger alert-modern animate-slide-in-right" role="alert">
+                                <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                <?php echo $_SESSION['pesan_error']; unset($_SESSION['pesan_error']); ?>
+                            </div>
+                        <?php endif; ?>
 
-                    <form action="register.php" method="POST">
-                        <div class="mb-3">
-                            <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control form-control-modern" id="nama_lengkap" name="nama_lengkap" required>
+                        <form  method="POST" class="auth-form">
+                            <div class="mb-3">
+                                <label for="nama_lengkap" class="form-label fw-500">Nama Lengkap</label>
+                                <div class="input-group input-group-modern">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="bi bi-person text-muted"></i>
+                                    </span>
+                                    <input type="text" 
+                                           class="form-control border-start-0 ps-0" 
+                                           id="nama_lengkap" 
+                                           name="nama_lengkap" 
+                                           placeholder="John Doe"
+                                           required 
+                                           autofocus>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label fw-500">Alamat Email</label>
+                                <div class="input-group input-group-modern">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="bi bi-envelope text-muted"></i>
+                                    </span>
+                                    <input type="email" 
+                                           class="form-control border-start-0 ps-0" 
+                                           id="email" 
+                                           name="email" 
+                                           placeholder="nama@email.com"
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label fw-500">Password</label>
+                                <div class="input-group input-group-modern">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="bi bi-lock text-muted"></i>
+                                    </span>
+                                    <input type="password" 
+                                           class="form-control border-start-0 ps-0" 
+                                           id="password" 
+                                           name="password" 
+                                           placeholder="Minimal 6 karakter"
+                                           required>
+                                </div>
+                                <small class="text-muted">Minimal 6 karakter</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password_confirm" class="form-label fw-500">Konfirmasi Password</label>
+                                <div class="input-group input-group-modern">
+                                    <span class="input-group-text bg-transparent border-end-0">
+                                        <i class="bi bi-shield-check text-muted"></i>
+                                    </span>
+                                    <input type="password" 
+                                           class="form-control border-start-0 ps-0" 
+                                           id="password_confirm" 
+                                           name="password_confirm" 
+                                           placeholder="Ulangi password"
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-gradient btn-lg">
+                                    <i class="bi bi-rocket-takeoff me-2"></i>Daftar Sekarang
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="card-footer text-center py-3 bg-light border-0">
+                        <div class="small">
+                            Sudah punya akun? 
+                            <a href="login.php" class="fw-600 text-decoration-none gradient-text">Masuk di sini</a>
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Alamat Email</label>
-                            <input type="email" class="form-control form-control-modern" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control form-control-modern" id="password" name="password" required>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Daftar</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="card-footer text-center py-3">
-                    <div class="small">Sudah punya akun? <a href="login.php">Masuk di sini</a></div>
+                
+                <!-- Back to Home Link -->
+                <div class="text-center mt-4">
+                    <a href="../index.php" class="text-muted text-decoration-none small">
+                        <i class="bi bi-arrow-left me-1"></i>Kembali ke Beranda
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 <?php require_once __DIR__ . '/../layout/footer.php'; ?>

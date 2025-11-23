@@ -1,6 +1,3 @@
-</div>
-    </div>
-
 <footer class="footer mt-auto py-3 bg-light border-top">
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center">
@@ -10,21 +7,27 @@
     </div>
 </footer>
 
+        </div> <!-- end main-content-wrapper -->
+    </div> <!-- end app-container -->
+
 <!-- Toast Notification Container -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
-    <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <!-- Success Toast -->
+    <div id="successToast" class="toast align-items-center border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 300px; background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">
         <div class="d-flex">
-            <div class="toast-body">
-                <i class="bi bi-check-circle-fill me-2"></i>
+            <div class="toast-body text-white fw-500">
+                <i class="bi bi-check-circle-fill me-2 fs-5"></i>
                 <span id="successToastBody"></span>
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
-    <div id="errorToast" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    
+    <!-- Error Toast -->
+    <div id="errorToast" class="toast align-items-center border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true" style="min-width: 300px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
         <div class="d-flex">
-            <div class="toast-body">
-                <i class="bi bi-exclamation-circle-fill me-2"></i>
+            <div class="toast-body text-white fw-500">
+                <i class="bi bi-exclamation-circle-fill me-2 fs-5"></i>
                 <span id="errorToastBody"></span>
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -59,5 +62,6 @@ if (isset($_SESSION['pesan_error'])) {
 }
 ?>
 
+<?php require_once __DIR__ . '/../modal/share_link_modal.php'; ?>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<nav id="sidebarMenu" class="d-md-block sidebar collapse" style="width: 250px;">
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
     <div class="position-sticky">
         <a href="/dashboard.php" class="sidebar-header d-flex align-items-center justify-content-center p-3 text-decoration-none">
             <i class="bi bi-wallet2 fs-4 me-2 text-success"></i>

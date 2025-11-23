@@ -62,48 +62,116 @@ $has_transactions = !empty($recent_transactions);
 
 ?>
 
-    <div class="container-fluid">
-        <div class="row">
-            <?php require_once __DIR__ . '/layout/sidebar.php'; ?>
+<?php require_once __DIR__ . '/layout/sidebar.php'; ?>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+<main class="px-4 py-4">
 
-                <div class="dashboard-header">
-                    <h1 class="h2">Dashboard</h1>
-                    <p class="text-muted">Selamat datang kembali, <?php echo htmlspecialchars($nama_pengguna); ?>!</p>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mb-3">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <button type="button" id="generateShareLinkBtn" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#shareLinkModal">
+                <i class="bi bi-share-fill"></i> Bagikan Laporan
+            </button>
+        </div>
+    </div>
+    <p class="text-muted">Selamat datang kembali, <?php echo htmlspecialchars($nama_pengguna); ?>!</p>
+
+    <!-- Summary Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h6 class="text-muted mb-2">Total Pemasukan</h6>
+                    <h3 class="text-success mb-0">Rp <?php echo number_format($total_pemasukan, 0, ',', '.'); ?></h3>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h6 class="text-muted mb-2">Total Pengeluaran</h6>
+                    <h3 class="text-danger mb-0">Rp <?php echo number_format($total_pengeluaran, 0, ',', '.'); ?></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h6 class="text-muted mb-2">Saldo Akhir</h6>
+                    <h3 class="<?php echo $saldo_akhir >= 0 ? 'text-primary' : 'text-danger'; ?> mb-0">
+                        Rp <?php echo number_format($saldo_akhir, 0, ',', '.'); ?>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            <?php if (!$has_transactions): ?>
-                <div class="empty-state">
-                    <i class="bi bi-inbox-fill empty-state-icon"></i>
-                    <h5>Yuk, Catat Transaksi Pertamamu!</h5>
-                    <p>Belum ada transaksi yang tercatat. Tambahkan transaksi pertamamu sekarang!</p>
-                    <a href="transaksi/index.php" class="btn btn-primary mt-3">Tambah Transaksi</a>
+    <!-- Chart -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Grafik Pemasukan & Pengeluaran</h5>
+        </div>
+        <div class="card-body">
+            <div style="height: 300px;">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Transaksi Terakhir</h5>
+        </div>
+        <div class="card-body">
+            <?php if ($has_transactions): ?>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                                <th>Kategori</th>
+                                <th>Tipe</th>
+                                <th class="text-end">Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($recent_transactions as $transaction): ?>
+                                <tr>
+                                    <td><?php echo date('d M Y', strtotime($transaction['tanggal_transaksi'])); ?></td>
+                                    <td><?php echo htmlspecialchars($transaction['keterangan']); ?></td>
+                                    <td><?php echo htmlspecialchars($transaction['nama_kategori']); ?></td>
+                                    <td>
+                                        <span class="badge <?php echo $transaction['tipe'] === 'Pemasukan' ? 'bg-success' : 'bg-danger'; ?>">
+                                            <?php echo $transaction['tipe']; ?>
+                                        </span>
+                                    </td>
+                                    <td class="text-end <?php echo $transaction['tipe'] === 'Pemasukan' ? 'text-success' : 'text-danger'; ?>">
+                                        Rp <?php echo number_format($transaction['jumlah'], 0, ',', '.'); ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             <?php else: ?>
-
-            <?php // Memanggil komponen kartu summary
-            require_once __DIR__ . '/dashboard/dashboard_summary_cards.php'; ?>
-
-            <?php // Memanggil komponen carousel wishlist
-            require_once __DIR__ . '/dashboard/dashboard_wishlist_carousel.php'; ?>
-
-            <?php // Memanggil komponen konten utama (grafik & transaksi terakhir)
-            require_once __DIR__ . '/dashboard/dashboard_main_content.php'; ?>
-
+                <p class="text-muted text-center py-4">Belum ada transaksi.</p>
             <?php endif; ?>
-        </main>
+        </div>
     </div>
-    <script>
-        // Melewatkan data PHP ke JavaScript dengan cara yang lebih bersih
-        const chartData = {
-            labels: <?php echo json_encode($labels); ?>,
-            pemasukan: <?php echo json_encode($pemasukan_data); ?>,
-            pengeluaran: <?php echo json_encode($pengeluaran_data); ?>
-        };
-    </script>
-    <script src="/js/dashboard.js"></script>
-</div>
+
+</main>
+
+<script>
+    // Chart data untuk dashboard.js
+    const chartData = {
+        labels: <?php echo json_encode($labels); ?>,
+        pemasukan: <?php echo json_encode($pemasukan_data); ?>,
+        pengeluaran: <?php echo json_encode($pengeluaran_data); ?>
+    };
+</script>
+<script src="/js/dashboard.js"></script>
 
 
 <?php

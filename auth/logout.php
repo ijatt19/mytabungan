@@ -8,7 +8,7 @@ session_unset();
 // Hancurkan sesi
 session_destroy();
 
-// Arahkan kembali ke halaman login
-header("Location: /auth/login.php");
+// Arahkan kembali ke halaman login (relative path)
+header("Location: login.php");
 exit;
 ?>

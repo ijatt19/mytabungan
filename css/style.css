@@ -1,25 +1,46 @@
 :root {
-  --primary-color: #16a34a; /* Warna hijau utama baru */
-  --secondary-color: #50e3c2; /* A fresh teal/mint */
-  --success-color: #28a745; /* Bootstrap's default green for consistency */
-  --danger-color: #dc3545; /* Bootstrap's default red */
-  --warning-color: #ffc107; /* Bootstrap's default yellow */
-  --light-color: #f7f9fc; /* A very light blue-gray for the background */
-  --dark-color: #242a38; /* A dark, slightly blueish color for text */
-  --text-muted: #6c757d;
+  /* Gradient Design System (matching landing page) */
+  --gradient-primary: linear-gradient(135deg, #16a34a 0%, #10b981 50%, #14b8a6 100%);
+  --gradient-hero: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdfa 100%);
+  --gradient-success: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+  --gradient-light: linear-gradient(135deg, #f8fafc 0%, #f0fdf4 100%);
+  
+  /* Brand Colors */
+  --primary-color: #16a34a; /* Green */
+  --primary-emerald: #10b981; /* Emerald */
+  --primary-teal: #14b8a6; /* Teal */
+  --secondary-color: #50e3c2; /* Mint */
+  
+  /* Semantic Colors */
+  --success-color: #10b981;
+  --danger-color: #ef4444;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+  
+  /* Neutral Colors */
+  --light-color: #f7f9fc;
+  --dark-color: #1e293b;
+  --text-muted: #64748b;
+  --text-secondary: #475569;
+  
+  /* Background Colors */
+  --body-bg: #f8fafc;
   --card-bg: #ffffff;
-  --card-border-color: #eaecef;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.07),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --card-border-color: #e2e8f0;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  /* Typography */
   --font-family-sans-serif: "Inter", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
-  background-color: #f8fafc; /* Sesuai permintaan */
+  background-color: var(--body-bg);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -28,6 +49,51 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Mobile Header */
+.mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid var(--card-border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 1030;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Mobile sidebar overlay */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1039;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+/* Add padding to body on mobile to account for fixed header */
+@media (max-width: 767.98px) {
+  body.app-layout {
+    padding-top: 60px;
+  }
+}
+
 
 h1,
 h2,
@@ -74,7 +140,7 @@ h6 {
 .form-control:focus,
 .form-select:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
   outline: none;
 }
 
@@ -91,7 +157,7 @@ h6 {
 .form-control-modern:focus {
   background-color: var(--card-bg) !important;
   border-color: var(--primary-color) !important;
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15), var(--shadow-sm) !important;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15), var(--shadow-sm) !important;
 }
 
 .btn {
@@ -334,78 +400,6 @@ h6 {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* --- Sidebar Modern Style --- */
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1020; /* Di atas elemen lain */
-  padding: 0;
-  box-shadow: var(--shadow-sm);
-  background-color: #f8f9fa; /* Warna abu muda */
-  border-right: 1px solid var(--card-border-color);
-}
-
-main {
-  position: relative; /* Diperlukan untuk positioning footer */
-  margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
-  flex-grow: 1; /* Membuat konten utama mengisi ruang yang tersedia */
-}
-
-.sidebar .position-sticky {
-  display: flex;
-  flex-direction: column;
-  height: 100vh; /* Tinggi penuh */
-}
-
-.sidebar-header {
-  color: var(--dark-color);
-  border-bottom: 1px solid var(--card-border-color);
-}
-
-.sidebar-header:hover {
-  background-color: #f1f5f9;
-}
-
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #334155; /* Warna teks menu */
-  display: flex;
-  align-items: center;
-  padding: 0.8rem 1.5rem;
-  margin: 0.25rem 1rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.sidebar .nav-link i {
-  font-size: 1.1rem;
-  line-height: 0;
-}
-
-.sidebar .nav-link:hover {
-  background-color: #e2e8f0; /* Efek hover abu-abu */
-  color: #1e293b;
-}
-
-.sidebar .nav-link.active {
-  background-color: #198754; /* Warna hijau aktif */
-  color: #fff;
-  box-shadow: var(--shadow-sm);
-}
-
-.sidebar .nav-link.active i {
-  color: #fff;
-}
-
-.sidebar-footer {
-  padding-bottom: 1rem;
-}
-
-.sidebar-footer .nav-link {
-  font-size: 0.95rem;
-}
 
 /* --- Transaction List Style (Dashboard) --- */
 .transaction-list {
@@ -440,12 +434,17 @@ main {
 }
 
 .footer {
-  padding-left: 250px; /* Sesuaikan dengan lebar sidebar */
-  z-index: 1019; /* Tepat di bawah sidebar */
+  z-index: 1019;
   position: relative;
 }
 
-/* === Redesain Wishlist Card Modern (V2 - Navigasi Refined) === */
+/* Responsive footer padding */
+@media (min-width: 768px) {
+  .footer {
+    padding-left: 0; /* Let Bootstrap grid handle spacing */
+  }
+}
+
 
 /* Menghapus style lama yang mungkin konflik */
 .wishlist-card,
@@ -744,3 +743,323 @@ main {
 }
 
 /* === End Halaman Daftar Wishlist === */
+
+/* === MODERN GRADIENT UTILITIES === */
+
+/* Gradient Buttons */
+.btn-gradient {
+  background: var(--gradient-primary);
+  border: none;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-gradient:hover::before {
+  left: 100%;
+}
+
+.btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3);
+  color: white;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Gradient Card Header */
+.card-header-gradient {
+  background: var(--gradient-primary);
+  color: white;
+  border-bottom: none;
+}
+
+/* Gradient Icon Background */
+.icon-gradient {
+  background: var(--gradient-primary);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Gradient Border on Hover */
+.card-gradient-hover {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.card-gradient-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card-gradient-hover:hover::before {
+  transform: scaleX(1);
+}
+
+.card-gradient-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* === ANIMATIONS === */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* === RESPONSIVE UTILITIES === */
+
+/* Hide on mobile */
+@media (max-width: 767.98px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Show only on mobile */
+.show-mobile {
+  display: none !important;
+}
+
+@media (max-width: 767.98px) {
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+/* Table responsive card view on mobile */
+@media (max-width: 767.98px) {
+  .table-responsive-cards .table thead {
+    display: none;
+  }
+  
+  .table-responsive-cards .table,
+  .table-responsive-cards .table tbody,
+  .table-responsive-cards .table tr,
+  .table-responsive-cards .table td {
+    display: block;
+    width: 100%;
+  }
+  
+  .table-responsive-cards .table tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--card-border-color);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: white;
+  }
+  
+  .table-responsive-cards .table td {
+    text-align: right;
+    padding: 0.5rem 0;
+    border: none;
+  }
+  
+  .table-responsive-cards .table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+}
+
+/* === AUTH PAGE STYLES === */
+
+/* Auth Page Specific Styles */
+.auth-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0fdfa 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-decoration {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(22, 163, 74, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.auth-decoration-1 {
+    width: 500px;
+    height: 500px;
+    top: -100px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+}
+
+.auth-decoration-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -150px;
+    left: -100px;
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+.auth-card {
+    border-radius: 24px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.auth-logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    border-radius: 20px;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.auth-logo i {
+    font-size: 2rem;
+    color: white;
+}
+
+.input-group-modern {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.input-group-modern:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1);
+}
+
+.input-group-modern .input-group-text {
+    border: none;
+    padding: 0.75rem 1rem;
+}
+
+.input-group-modern .form-control {
+    border: none;
+    padding: 0.75rem 1rem 0.75rem 0;
+}
+
+.input-group-modern .form-control:focus {
+    box-shadow: none;
+}
+
+.alert-modern {
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+/* === END OF MODERN STYLES === */

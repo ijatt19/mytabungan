@@ -5,29 +5,53 @@ require_once __DIR__ . '/../auth/cek_masuk.php';
 
 $id_pengguna = $_SESSION['id_pengguna'];
 
-// Logika untuk Edit Wishlist (POST request)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit') {
-    $id_wishlist = $_POST['id_wishlist'];
-    $nama_barang = trim($_POST['nama_barang']);
-    $harga = $_POST['harga'];
-    $prioritas = $_POST['prioritas'];
+// Logika untuk Tambah & Edit Wishlist (POST request)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+    if ($_POST['action'] === 'add') {
+        $nama_barang = trim($_POST['nama_barang']);
+        $harga = $_POST['harga'];
+        $prioritas = $_POST['prioritas'];
 
-    if (empty($nama_barang) || empty($harga) || empty($prioritas) || empty($id_wishlist)) {
-        $_SESSION['pesan_error'] = 'Gagal memperbarui, semua kolom wajib diisi.';
-    } elseif (!is_numeric($harga) || $harga < 0) {
-        $_SESSION['pesan_error'] = 'Harga harus berupa angka yang valid.';
-    } else {
-        try {
-            $sql = "UPDATE wishlist SET nama_barang = ?, harga = ?, prioritas = ? WHERE id_wishlist = ? AND id_pengguna = ?";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$nama_barang, $harga, $prioritas, $id_wishlist, $id_pengguna]);
-            $_SESSION['pesan_sukses'] = 'Impian berhasil diperbarui.';
-        } catch (PDOException $e) {
-            $_SESSION['pesan_error'] = 'Terjadi kesalahan database: ' . $e->getMessage();
+        if (empty($nama_barang) || empty($harga) || empty($prioritas)) {
+            $_SESSION['pesan_error'] = 'Semua kolom wajib diisi.';
+        } elseif (!is_numeric($harga) || $harga < 0) {
+            $_SESSION['pesan_error'] = 'Harga harus berupa angka yang valid.';
+        } else {
+            try {
+                $sql = "INSERT INTO wishlist (id_pengguna, nama_barang, harga, prioritas, status, dibuat_pada) VALUES (?, ?, ?, ?, 'Belum Tercapai', NOW())";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$id_pengguna, $nama_barang, $harga, $prioritas]);
+                $_SESSION['pesan_sukses'] = 'Impian baru berhasil ditambahkan!';
+            } catch (PDOException $e) {
+                $_SESSION['pesan_error'] = 'Terjadi kesalahan database: ' . $e->getMessage();
+            }
         }
+        header('Location: index.php');
+        exit;
+
+    } elseif ($_POST['action'] === 'edit') {
+        $id_wishlist = $_POST['id_wishlist'];
+        $nama_barang = trim($_POST['nama_barang']);
+        $harga = $_POST['harga'];
+        $prioritas = $_POST['prioritas'];
+
+        if (empty($nama_barang) || empty($harga) || empty($prioritas) || empty($id_wishlist)) {
+            $_SESSION['pesan_error'] = 'Gagal memperbarui, semua kolom wajib diisi.';
+        } elseif (!is_numeric($harga) || $harga < 0) {
+            $_SESSION['pesan_error'] = 'Harga harus berupa angka yang valid.';
+        } else {
+            try {
+                $sql = "UPDATE wishlist SET nama_barang = ?, harga = ?, prioritas = ? WHERE id_wishlist = ? AND id_pengguna = ?";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$nama_barang, $harga, $prioritas, $id_wishlist, $id_pengguna]);
+                $_SESSION['pesan_sukses'] = 'Impian berhasil diperbarui.';
+            } catch (PDOException $e) {
+                $_SESSION['pesan_error'] = 'Terjadi kesalahan database: ' . $e->getMessage();
+            }
+        }
+        header('Location: index.php?' . http_build_query($_GET));
+        exit;
     }
-    header('Location: index.php?' . http_build_query($_GET));
-    exit;
 }
 
 // Logika Filter & Pencarian
@@ -96,14 +120,14 @@ try {
 }
 ?>
 
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+<main class="px-4 py-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2 fw-bold">Daftar Impian</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="tambah.php" class="btn btn-primary rounded-3 shadow-sm">
+            <button type="button" class="btn btn-primary rounded-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#tambahWishlistModal">
                 <i class="bi bi-plus-lg me-2"></i>
                 Tambah Impian
-            </a>
+            </button>
         </div>
     </div>
 
@@ -148,7 +172,7 @@ try {
                 <div class="text-center p-5 bg-light rounded-3">
                     <i class="bi bi-search-heart fs-1 text-muted"></i>
                     <h5 class="mt-3">Tidak Ada Impian yang Ditemukan</h5>
-                    <p class="text-muted">Coba ubah filter pencarianmu atau <a href="tambah.php">tambahkan impian baru</a>.</p>
+                    <p class="text-muted">Coba ubah filter pencarianmu atau <a href="#tambahWishlistModal" data-bs-toggle="modal">tambahkan impian baru</a>.</p>
                 </div>
             </div>
         <?php else: ?>
