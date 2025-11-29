@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
   // Inisialisasi semua tooltip
   const tooltipTriggerList = [].slice.call(
@@ -74,28 +75,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Fungsi untuk menampilkan toast sukses
 function showSuccessToast(message) {
-  const successToastEl = document.getElementById("successToast");
-  const successToastBody = document.getElementById("successToastBody");
-  if (successToastEl && successToastBody) {
-    successToastBody.textContent = message;
-    const toast = new bootstrap.Toast(successToastEl, { 
-      delay: 4000, // Success 4 detik
-      animation: true 
-    });
-    toast.show();
+  const container = document.getElementById("toastContainer");
+  const template = document.getElementById("successToastTemplate");
+  
+  if (container && template) {
+    const clone = template.content.cloneNode(true);
+    const toastEl = clone.querySelector(".toast-item");
+    toastEl.querySelector(".toast-message").textContent = message;
+    
+    container.appendChild(toastEl);
+    
+    // Trigger reflow
+    void toastEl.offsetWidth;
+    
+    // Animate in
+    toastEl.classList.remove("translate-x-full", "opacity-0");
+    
+    // Auto hide
+    setTimeout(() => {
+      toastEl.classList.add("translate-x-full", "opacity-0");
+      setTimeout(() => {
+        toastEl.remove();
+      }, 300); // Wait for transition
+    }, 2500); // 2.5 seconds display time
   }
 }
 
 // Fungsi untuk menampilkan toast error
 function showErrorToast(message) {
-  const errorToastEl = document.getElementById("errorToast");
-  const errorToastBody = document.getElementById("errorToastBody");
-  if (errorToastEl && errorToastBody) {
-    errorToastBody.textContent = message;
-    const toast = new bootstrap.Toast(errorToastEl, { 
-      delay: 5000, // Error 5 detik (lebih lama agar user bisa baca)
-      animation: true 
-    });
-    toast.show();
+  const container = document.getElementById("toastContainer");
+  const template = document.getElementById("errorToastTemplate");
+  
+  if (container && template) {
+    const clone = template.content.cloneNode(true);
+    const toastEl = clone.querySelector(".toast-item");
+    toastEl.querySelector(".toast-message").textContent = message;
+    
+    container.appendChild(toastEl);
+    
+    // Trigger reflow
+    void toastEl.offsetWidth;
+    
+    // Animate in
+    toastEl.classList.remove("translate-x-full", "opacity-0");
+    
+    // Auto hide
+    setTimeout(() => {
+      toastEl.classList.add("translate-x-full", "opacity-0");
+      setTimeout(() => {
+        toastEl.remove();
+      }, 300); // Wait for transition
+    }, 2500); // 2.5 seconds display time
   }
+}
+
+// Helper untuk modal konfirmasi hapus
+function confirmDelete(url) {
+    const modal = document.getElementById('konfirmasiModal');
+    const btn = document.getElementById('konfirmasiModalButton');
+    if (modal && btn) {
+        btn.href = url;
+        modal.classList.remove('hidden');
+    }
 }

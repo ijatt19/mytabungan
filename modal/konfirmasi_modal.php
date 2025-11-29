@@ -1,25 +1,25 @@
 <!-- Generic Confirmation Modal -->
-<div class="modal fade" id="konfirmasiModal" tabindex="-1" aria-labelledby="konfirmasiModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
-        <div class="modal-content rounded-4 border-0 shadow-lg">
-            <div class="modal-body p-4 text-center">
-                <div class="mb-3">
-                    <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 3rem;"></i>
+<div id="konfirmasiModal" class="hidden fixed inset-0 bg-black/10 backdrop-blur-sm z-[100] flex items-center justify-center p-4" aria-labelledby="konfirmasiModalLabel" aria-modal="true" role="dialog">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm transform transition-all">
+        <div class="p-6 text-center">
+            <div class="mb-4">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100">
+                    <i class="bi bi-exclamation-triangle-fill text-red-600 text-4xl"></i>
                 </div>
-                <h5 class="modal-title mb-2 fw-bold" id="konfirmasiModalLabel">Hapus Data?</h5>
-                <p class="text-muted" id="konfirmasiModalBody">
-                    Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.
-                </p>
             </div>
-            <div class="modal-footer flex-nowrap p-0">
-                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" data-bs-dismiss="modal">
-                    <strong>Batal</strong>
-                </button>
-                <a href="#" id="konfirmasiModalButton" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 text-danger">
-                    <i class="bi bi-trash me-2"></i>
-                    Hapus
-                </a>
-            </div>
+            <h5 class="text-xl font-bold text-gray-900 mb-2" id="konfirmasiModalLabel">Hapus Data?</h5>
+            <p class="text-gray-600 text-sm" id="konfirmasiModalBody">
+                Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.
+            </p>
+        </div>
+        <div class="flex border-t border-gray-200">
+            <button type="button" class="flex-1 px-4 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 border-r border-gray-200 transition-colors" onclick="document.getElementById('konfirmasiModal').classList.add('hidden')">
+                Batal
+            </button>
+            <a href="#" id="konfirmasiModalButton" class="flex-1 px-4 py-3 text-base font-semibold text-red-600 hover:bg-red-50 transition-colors inline-flex items-center justify-center gap-2">
+                <i class="bi bi-trash"></i>
+                Hapus
+            </a>
         </div>
     </div>
 </div>

@@ -47,7 +47,7 @@ body {
   font-family: var(--font-family-sans-serif);
   color: var(--dark-color);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
 }
 
 /* Mobile Header */
@@ -91,6 +91,11 @@ body {
 @media (max-width: 767.98px) {
   body.app-layout {
     padding-top: 60px;
+  }
+  
+  /* Sidebar Toggle State */
+  #sidebarMenu.show {
+    transform: translateX(0) !important;
   }
 }
 

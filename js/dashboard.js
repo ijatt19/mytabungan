@@ -81,67 +81,109 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // === SHARE LINK FEATURE ===
-  const shareLinkModal = document.getElementById('shareLinkModal');
+  // === DRAGGABLE CAROUSEL INITIALIZATION ===
+  enableDragScroll('.draggable-carousel');
+});
+
+// Fungsi untuk switch tab wishlist di dashboard
+function switchWishlistTab(priority) {
+  // Hide all contents
+  document.querySelectorAll('.wishlist-tab-content').forEach(el => {
+    el.classList.add('hidden');
+  });
   
-  if (shareLinkModal) {
-    const linkInput = document.getElementById('shareableLinkInput');
-    const copyBtn = document.getElementById('copyShareLinkBtn');
-    const copySuccessMsg = document.getElementById('copy-success-message');
-
-    // Initialize tooltip if copyBtn exists
-    let copyTooltip;
-    if (copyBtn) {
-      copyTooltip = new bootstrap.Tooltip(copyBtn);
+  // Show selected content
+  const content = document.getElementById('content-' + priority);
+  if (content) {
+    content.classList.remove('hidden');
+  }
+  
+  // Update tab styles
+  const tabs = ['Tinggi', 'Sedang', 'Rendah'];
+  tabs.forEach(tab => {
+    const btn = document.getElementById('tab-' + tab);
+    if (tab === priority) {
+      btn.classList.remove('text-gray-500', 'hover:text-gray-900');
+      btn.classList.add('bg-white', 'text-gray-900', 'shadow-sm');
+    } else {
+      btn.classList.add('text-gray-500', 'hover:text-gray-900');
+      btn.classList.remove('bg-white', 'text-gray-900', 'shadow-sm');
     }
+  });
+}
 
-    // Saat modal ditampilkan, panggil fungsi untuk membuat link
-    shareLinkModal.addEventListener('show.bs.modal', function () {
-      // Reset state
-      if (linkInput) linkInput.value = 'Membuat link...';
-      if (copySuccessMsg) copySuccessMsg.style.display = 'none';
-      if (copyBtn) copyBtn.disabled = true;
-      if (copyTooltip) copyTooltip.setContent({ '.tooltip-inner': 'Salin ke clipboard' });
+// Fungsi untuk mengaktifkan drag scroll pada element
+function enableDragScroll(selector) {
+  const sliders = document.querySelectorAll(selector);
+  
+  sliders.forEach(slider => {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-      fetch('includes/generate_share_link.php')
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            if (linkInput) linkInput.value = data.url;
-            if (copyBtn) copyBtn.disabled = false;
-          } else {
-            if (linkInput) linkInput.value = 'Gagal membuat link: ' + data.message;
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          if (linkInput) linkInput.value = 'Terjadi kesalahan koneksi.';
-        });
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active'); // Optional: for styling
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
     });
 
-    // Fungsi untuk menyalin link ke clipboard
-    if (copyBtn) {
-      copyBtn.addEventListener('click', function () {
-        navigator.clipboard.writeText(linkInput.value).then(() => {
-          // Tampilkan pesan sukses
-          if (copySuccessMsg) {
-            copySuccessMsg.style.display = 'block';
-            setTimeout(() => {
-              copySuccessMsg.style.display = 'none';
-            }, 2000);
-          }
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
 
-          // Ubah tooltip sementara
-          if (copyTooltip) {
-            copyTooltip.setContent({ '.tooltip-inner': 'Disalin!' });
-            setTimeout(() => {
-              copyTooltip.setContent({ '.tooltip-inner': 'Salin ke clipboard' });
-            }, 2000);
-          }
-        }).catch(err => {
-          console.error('Gagal menyalin: ', err);
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5; // Scroll-fast multiplier
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  });
+}
+
+// Fungsi untuk generate share link
+function generateShareLink() {
+  const btn = document.querySelector('button[onclick="generateShareLink()"]');
+  const originalText = btn.innerHTML;
+  
+  // Loading state
+  btn.disabled = true;
+  btn.innerHTML = '<i class="bi bi-hourglass-split mr-2"></i> Loading...';
+
+  fetch('includes/generate_share_link.php')
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Copy to clipboard
+        navigator.clipboard.writeText(data.url).then(() => {
+          btn.innerHTML = '<i class="bi bi-check-lg mr-2"></i> Tersalin!';
+          btn.classList.remove('bg-white', 'text-gray-700');
+          btn.classList.add('bg-green-50', 'text-green-600', 'border-green-200');
+          
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.add('bg-white', 'text-gray-700');
+            btn.classList.remove('bg-green-50', 'text-green-600', 'border-green-200');
+          }, 3000);
         });
-      });
-    }
-  }
-});
+      } else {
+        alert('Gagal: ' + data.message);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Terjadi kesalahan saat membuat link.');
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    });
+}

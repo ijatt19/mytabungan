@@ -1,4 +1,5 @@
 <?php
+// config/koneksi.php
 
 $host = 'localhost';
 $db   = 'tabung_db';

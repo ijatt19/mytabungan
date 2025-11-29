@@ -38,12 +38,15 @@ Fitur Login, Register, dan Lupa Password dengan desain modern dan aman.
 Kelola informasi akun dan keamanan password Anda dengan mudah.
 ![Profile](img/Profile.png)
 
+### 8. Responsif & Modern
+Desain yang responsif untuk berbagai ukuran layar (Mobile, Tablet, Desktop) dan antarmuka yang modern menggunakan Tailwind CSS.
+
 ## 🛠️ Teknologi yang Digunakan
 
 *   **Backend**: PHP Native (PDO)
 *   **Database**: MySQL
 *   **Frontend**: HTML5, CSS3, JavaScript
-*   **Framework CSS**: Bootstrap 5.3
+*   **Framework CSS**: Tailwind CSS v4
 *   **Icons**: Bootstrap Icons
 *   **Font**: Inter (Google Fonts)
 *   **Chart**: Chart.js
@@ -53,14 +56,26 @@ Kelola informasi akun dan keamanan password Anda dengan mudah.
 1.  **Clone Repository**
     ```bash
     git clone https://github.com/username/mytabungan.git
+    cd mytabungan
     ```
-2.  **Siapkan Database**
-    *   Buat database baru di phpMyAdmin bernama `tabungan_db` (atau sesuai konfigurasi).
-    *   Import file database `.sql` yang disertakan (jika ada) atau jalankan migrasi.
-3.  **Konfigurasi Koneksi**
+
+2.  **Install Dependencies & Build CSS**
+    Aplikasi ini menggunakan Tailwind CSS v4. Pastikan Node.js terinstall.
+    ```bash
+    npm install
+    npm run build
+    ```
+    *Untuk development (watch mode):* `npm run watch`
+
+3.  **Siapkan Database**
+    *   Buat database baru di phpMyAdmin bernama `tabungan_db`.
+    *   Import file `tabung_db.sql` ke dalam database tersebut.
+
+4.  **Konfigurasi Koneksi**
     *   Buka `config/koneksi.php`.
-    *   Sesuaikan host, user, password, dan nama database.
-4.  **Jalankan Aplikasi**
+    *   Sesuaikan host, user, password, dan nama database jika berbeda.
+
+5.  **Jalankan Aplikasi**
     *   Pastikan XAMPP/Apache berjalan.
     *   Akses `http://localhost/tabung` di browser Anda.
 

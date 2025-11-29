@@ -1,0 +1,27 @@
+{
+  "name": "tabung",
+  "version": "1.0.0",
+  "description": "MyTabungan adalah aplikasi web sederhana namun powerful untuk membantu Anda mengelola keuangan pribadi. Dengan fitur pencatatan pemasukan, pengeluaran, serta penetapan target impian (wishlist), MyTabungan memudahkan Anda mencapai kebebasan finansial.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css",
+    "watch": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ijatt19/mytabungan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ijatt19/mytabungan/issues"
+  },
+  "homepage": "https://github.com/ijatt19/mytabungan#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}

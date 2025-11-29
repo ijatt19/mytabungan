@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     }
     const response = await fetch(
-      `/kategori/index.php?action=check_name&nama_kategori=${encodeURIComponent(
+      `/auth/api_check_nama.php?nama_kategori=${encodeURIComponent(
         name
       )}&exclude_id=${excludeId}`
     );
