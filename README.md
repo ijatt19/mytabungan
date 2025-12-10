@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![MyTabungan Logo](https://via.placeholder.com/120x120/10b981/ffffff?text=MT)
-
 **Kelola Keuangan Anda dengan Mudah dan Modern**
 
 [![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
