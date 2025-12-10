@@ -1,0 +1,531 @@
+/* =====================================================
+   MyTabungan - Tailwind CSS Input File
+   Personal Finance Management Application
+   ===================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   Base Styles
+   ===================================================== */
+@layer base {
+    * {
+        font-family: 'Outfit', sans-serif;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        @apply bg-slate-100 min-h-screen;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        @apply bg-slate-100 rounded;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        @apply bg-slate-300 rounded;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-slate-400;
+    }
+}
+
+/* =====================================================
+   Component Styles
+   ===================================================== */
+@layer components {
+    /* Glass Effect */
+    .glass {
+        @apply bg-white/80 backdrop-blur-xl;
+    }
+    
+    .glass-dark {
+        @apply bg-slate-900/80 backdrop-blur-xl;
+    }
+    
+    /* Gradient Backgrounds */
+    .gradient-primary {
+        @apply bg-gradient-to-r from-emerald-500 to-teal-500;
+    }
+    
+    .gradient-income {
+        @apply bg-gradient-to-r from-emerald-500 to-green-600;
+    }
+    
+    .gradient-expense {
+        @apply bg-gradient-to-r from-red-500 to-rose-600;
+    }
+    
+    .gradient-balance {
+        @apply bg-gradient-to-r from-sky-500 to-blue-600;
+    }
+    
+    /* Card Styles */
+    .card {
+        @apply bg-white/80 backdrop-blur-xl border border-white/30 rounded-2xl shadow-lg transition-all duration-200;
+    }
+    
+    .card:hover {
+        @apply -translate-y-1 shadow-xl;
+    }
+    
+    /* Navigation Link */
+    .nav-link {
+        @apply flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 transition-all duration-200;
+    }
+    
+    .nav-link:hover {
+        @apply bg-emerald-50 text-emerald-600;
+    }
+    
+    .nav-link.active {
+        @apply bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30;
+    }
+    
+    .nav-link i {
+        @apply text-xl min-w-[1.5rem] text-center;
+    }
+    
+    /* Buttons */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-xl transition-all duration-200 cursor-pointer border-none;
+    }
+    
+    .btn-primary {
+        @apply bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30;
+    }
+    
+    .btn-primary:hover {
+        @apply -translate-y-0.5 shadow-xl shadow-emerald-500/40;
+    }
+    
+    .btn-secondary {
+        @apply bg-slate-100 text-slate-600;
+    }
+    
+    .btn-secondary:hover {
+        @apply bg-slate-200;
+    }
+    
+    .btn-danger {
+        @apply bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-lg shadow-red-500/30;
+    }
+    
+    .btn-danger:hover {
+        @apply -translate-y-0.5 shadow-xl shadow-red-500/40;
+    }
+    
+    .btn-outline {
+        @apply bg-transparent border-2 border-emerald-500 text-emerald-500;
+    }
+    
+    .btn-outline:hover {
+        @apply bg-emerald-500 text-white;
+    }
+    
+    /* Form Inputs */
+    .form-input {
+        @apply w-full px-4 py-3 border-2 border-slate-200 rounded-xl text-base transition-all duration-200 bg-white;
+    }
+    
+    .form-input:focus {
+        @apply outline-none border-emerald-500 ring-4 ring-emerald-500/10;
+    }
+    
+    .form-input::placeholder {
+        @apply text-slate-400;
+    }
+    
+    .form-label {
+        @apply block mb-2 font-medium text-slate-700;
+    }
+    
+    /* Badge */
+    .badge {
+        @apply inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold rounded-full;
+    }
+    
+    .badge-success {
+        @apply bg-emerald-100 text-emerald-700;
+    }
+    
+    .badge-danger {
+        @apply bg-red-100 text-red-700;
+    }
+    
+    .badge-warning {
+        @apply bg-amber-100 text-amber-700;
+    }
+    
+    .badge-info {
+        @apply bg-blue-100 text-blue-700;
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+        @apply h-2 bg-slate-200 rounded-full overflow-hidden;
+    }
+    
+    .progress-bar-fill {
+        @apply h-full rounded-full transition-all duration-500;
+    }
+    
+    /* Modal */
+    .modal-overlay {
+        @apply fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 invisible transition-all duration-300;
+    }
+    
+    .modal-overlay.active {
+        @apply opacity-100 visible;
+    }
+    
+    .modal-content {
+        @apply bg-white rounded-2xl shadow-2xl max-w-md w-[90%] max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300;
+    }
+    
+    .modal-overlay.active .modal-content {
+        @apply scale-100;
+    }
+    
+    /* Table */
+    .table-container {
+        @apply overflow-x-auto rounded-2xl;
+    }
+    
+    .data-table {
+        @apply w-full border-collapse;
+    }
+    
+    .data-table th {
+        @apply bg-slate-50 px-4 py-3 text-left font-semibold text-slate-600 border-b-2 border-slate-200;
+    }
+    
+    .data-table td {
+        @apply px-4 py-3 border-b border-slate-100;
+    }
+    
+    .data-table tbody tr:hover {
+        @apply bg-slate-50;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+        @apply transition-all duration-300;
+    }
+    
+    .sidebar-collapsed {
+        @apply !w-24;
+    }
+    
+    .sidebar-collapsed .sidebar-text {
+        @apply opacity-0 w-0 h-0 overflow-hidden;
+    }
+    
+    .sidebar-collapsed .sidebar-logo-text {
+        @apply hidden;
+    }
+    
+    .sidebar-collapsed .nav-link {
+        @apply justify-center px-0;
+    }
+    
+    .sidebar-collapsed nav {
+        @apply px-2;
+    }
+    
+    /* Mobile Navigation */
+    .mobile-nav {
+        @apply fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-100 px-4 py-2 z-40;
+    }
+    
+    .mobile-nav-item {
+        @apply flex flex-col items-center gap-1 p-2 text-slate-500 text-xs transition-colors duration-200;
+    }
+    
+    .mobile-nav-item.active {
+        @apply text-emerald-500;
+    }
+    
+    .mobile-nav-item i {
+        @apply text-xl;
+    }
+    
+    /* Dropdown */
+    .dropdown-menu {
+        @apply opacity-0 invisible translate-y-[-10px] transition-all duration-200;
+    }
+    
+    .dropdown-menu.active {
+        @apply opacity-100 visible translate-y-0;
+    }
+    
+    /* Loading Skeleton */
+    .skeleton {
+        @apply bg-gradient-to-r from-slate-100 via-slate-200 to-slate-100 bg-[length:200%_100%] animate-pulse rounded-lg;
+    }
+    
+    /* Empty State */
+    .empty-state {
+        @apply flex flex-col items-center justify-center p-12 text-center text-slate-400;
+    }
+    
+    .empty-state i {
+        @apply text-6xl mb-4 opacity-50;
+    }
+    
+    /* Money Colors */
+    .text-money-positive {
+        @apply text-emerald-600;
+    }
+    
+    .text-money-negative {
+        @apply text-red-600;
+    }
+    
+    /* Flash Messages */
+    .flash-message {
+        @apply border-l-4 p-4 rounded-lg mb-4 flex items-center gap-3 animate-fade-in;
+    }
+}
+
+/* =====================================================
+   Utility Styles
+   ===================================================== */
+@layer utilities {
+    /* Animation Delays */
+    .delay-100 {
+        animation-delay: 100ms;
+    }
+    .delay-200 {
+        animation-delay: 200ms;
+    }
+    .delay-300 {
+        animation-delay: 300ms;
+    }
+    .delay-400 {
+        animation-delay: 400ms;
+    }
+    .delay-500 {
+        animation-delay: 500ms;
+    }
+    
+    /* Page Transition */
+    .page-enter {
+        @apply opacity-0;
+        animation: fadeInPage 0.3s ease forwards;
+    }
+    
+    @keyframes fadeInPage {
+        to { opacity: 1; }
+    }
+}
+
+/* =====================================================
+   Print Styles
+   ===================================================== */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-only {
+        display: block !important;
+    }
+    
+    body {
+        background: white;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid #e2e8f0;
+    }
+}
+
+/* =====================================================
+   Landing Page Styles
+   ===================================================== */
+
+/* Gradient Backgrounds for Landing */
+.gradient-bg {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
+}
+
+.hero-gradient {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 50%, #06b6d4 100%);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Float Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.float-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Pulse Glow Effect */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.5); }
+}
+
+.pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Feature Card Hover */
+.feature-card {
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Scroll Indicator Bounce */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.scroll-indicator {
+    animation: bounce 2s infinite;
+}
+
+/* Landing Page Buttons */
+.btn-landing-primary {
+    background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+    transition: all 0.3s ease;
+}
+
+.btn-landing-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4);
+}
+
+.btn-landing-secondary {
+    border: 2px solid #10b981;
+    color: #10b981;
+    transition: all 0.3s ease;
+}
+
+.btn-landing-secondary:hover {
+    background: #10b981;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* =====================================================
+   Auth Pages Styles (Login / Register)
+   ===================================================== */
+
+/* Auth Container Grid Layout */
+.auth-container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+    .auth-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Feature/Step Items Animation */
+.auth-feature-item {
+    opacity: 0;
+    animation: authSlideIn 0.5s ease forwards;
+}
+
+.auth-feature-item:nth-child(1) { animation-delay: 0.1s; }
+.auth-feature-item:nth-child(2) { animation-delay: 0.2s; }
+.auth-feature-item:nth-child(3) { animation-delay: 0.3s; }
+.auth-feature-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes authSlideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Button Shine Effect */
+.btn-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-shine:hover::before {
+    left: 100%;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    height: 4px;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* Form Step (Register) */
+.form-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.step-number {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}

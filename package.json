@@ -1,0 +1,21 @@
+{
+  "name": "mytabungan",
+  "version": "1.0.0",
+  "description": "MyTabungan - Personal Finance Management Application",
+  "main": "index.php",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/styles.css --watch",
+    "build": "npx tailwindcss -i ./assets/css/input.css -o ./assets/css/styles.css --minify"
+  },
+  "keywords": [
+    "finance",
+    "management",
+    "php",
+    "tailwindcss"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
