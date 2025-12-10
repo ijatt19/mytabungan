@@ -326,8 +326,7 @@ Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
 <div align="center">
 
-**Dibuat dengan ❤️ menggunakan PHP & Tailwind CSS**
 
-© 2024 MyTabungan. All rights reserved.
+© 2025 MyTabungan. Izzat Fakhar Assyakur - 221011400803.
 
 </div>
