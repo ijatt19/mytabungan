@@ -2,6 +2,8 @@
 
 <div align="center">
 
+![MyTabungan Logo](https://via.placeholder.com/120x120/10b981/ffffff?text=MT)
+
 **Kelola Keuangan Anda dengan Mudah dan Modern**
 
 [![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
@@ -13,96 +15,189 @@
 
 ---
 
-## 📸 Screenshots
+## ✨ Fitur
 
-### Landing Page
+### 🏠 Landing Page
+
 ![Landing Page](assets/img/landing%20page.png)
 
-### Authentication
-| Login | Register | Lupa Password |
-|-------|----------|---------------|
-| ![Login](assets/img/login.png) | ![Register](assets/img/daftar.png) | ![Lupa Password](assets/img/lupapassword.png) |
+Halaman utama yang menyambut pengguna dengan desain modern. Halaman ini berfungsi sebagai pintu masuk aplikasi untuk pengguna baru.
 
-### Dashboard
-![Dashboard](assets/img/dashboard.png)
+**Fitur halaman ini:**
 
-### Transaksi
-| Daftar Transaksi | Tambah Transaksi |
-|------------------|------------------|
-| ![Transaksi](assets/img/transaksi.png) | ![Tambah Transaksi](assets/img/tambah_transaksi.png) |
-
-### Kategori
-| Daftar Kategori | Tambah Kategori |
-|-----------------|-----------------|
-| ![Kategori](assets/img/kategori.png) | ![Tambah Kategori](assets/img/tambah_kategori.png) |
-
-### Wishlist
-| Daftar Wishlist | Tambah Wishlist |
-|-----------------|-----------------|
-| ![Wishlist](assets/img/wishlist.png) | ![Tambah Wishlist](assets/img/tambah_wishlist.png) |
-
-### Share Laporan
-| Manage Share Links | Laporan Shared |
-|--------------------|----------------|
-| ![Share Links](assets/img/share_link.png) | ![Laporan Share](assets/img/laporan_share.png) |
-
-### Profil
-![Profile](assets/img/profile.png)
+- ✅ Desain modern dengan animasi smooth scroll
+- ✅ Navbar responsive dengan hamburger menu untuk mobile
+- ✅ Auto-hide navbar saat scroll ke bawah
+- ✅ Showcase fitur-fitur unggulan aplikasi
+- ✅ Call-to-Action (CTA) untuk mendaftar atau login
 
 ---
 
-## ✨ Fitur Utama
+### 🔐 Autentikasi (Login, Register, Lupa Password)
 
-### 🏠 Landing Page
-- Halaman landing modern dengan animasi smooth
-- Navbar responsive dengan hamburger menu
-- Auto-hide navbar saat scroll
+| Login                          | Register                           | Lupa Password                                 |
+| ------------------------------ | ---------------------------------- | --------------------------------------------- |
+| ![Login](assets/img/login.png) | ![Register](assets/img/daftar.png) | ![Lupa Password](assets/img/lupapassword.png) |
 
-### 📊 Dashboard Interaktif
-- Ringkasan keuangan (pemasukan, pengeluaran, saldo)
-- Grafik tren bulanan dengan Chart.js
-- Widget kesehatan finansial
-- Transaksi terbaru
+Sistem autentikasi lengkap untuk keamanan akun pengguna.
+
+**🔑 Login** - Halaman untuk masuk ke akun:
+
+- Form login dengan validasi email & password
+- Remember me functionality
+- Link ke halaman register dan lupa password
+- Toast notification untuk feedback error/success
+
+**📝 Register** - Halaman untuk mendaftar akun baru:
+
+- Form registrasi dengan nama, email, dan password
+- Validasi password minimal 6 karakter
+- Harus menyetujui Terms & Privacy Policy
+- Password di-hash menggunakan bcrypt
+
+**🔓 Lupa Password** - Halaman untuk reset password:
+
+- Masukkan email yang terdaftar
+- Development mode: langsung set password baru
+- Validasi email harus terdaftar di database
+
+---
+
+### 📊 Dashboard
+
+![Dashboard](assets/img/dashboard.png)
+
+Pusat kontrol keuangan Anda! Halaman ini menampilkan ringkasan lengkap kondisi keuangan dalam satu tampilan.
+
+**Fitur halaman ini:**
+
+- ✅ **Ringkasan Keuangan** - Total pemasukan, pengeluaran, dan saldo
+- ✅ **Grafik Tren Bulanan** - Visualisasi chart menggunakan Chart.js
+- ✅ **Widget Kesehatan Finansial** - Indikator apakah keuangan sehat atau tidak
+- ✅ **Transaksi Terbaru** - 5 transaksi terakhir yang dicatat
+- ✅ **Quick Actions** - Shortcut untuk menambah transaksi baru
+
+---
 
 ### 💰 Manajemen Transaksi
-- Catat pemasukan dan pengeluaran
-- Filter berdasarkan bulan/tahun
-- Pagination untuk performa optimal
-- Modal form untuk tambah/edit
+
+| Daftar Transaksi                       | Tambah Transaksi                                     |
+| -------------------------------------- | ---------------------------------------------------- |
+| ![Transaksi](assets/img/transaksi.png) | ![Tambah Transaksi](assets/img/tambah_transaksi.png) |
+
+Halaman untuk mencatat dan mengelola semua transaksi keuangan Anda.
+
+**📋 Daftar Transaksi** - Menampilkan riwayat semua transaksi:
+
+- Filter berdasarkan bulan dan tahun
+- Pagination untuk performa optimal saat data banyak
+- Warna berbeda untuk pemasukan (hijau) dan pengeluaran (merah)
+- Aksi edit dan hapus untuk setiap transaksi
+
+**➕ Tambah Transaksi** - Modal form untuk mencatat transaksi baru:
+
+- Pilih tipe: Pemasukan atau Pengeluaran
+- Pilih kategori yang sudah dibuat
+- Input jumlah, tanggal, dan keterangan
+- Validasi input sebelum disimpan
+
+---
 
 ### 🏷️ Kategori Kustom
-- Buat kategori dengan ikon dan warna custom
-- Kategori terpisah untuk pemasukan & pengeluaran
-- Icon picker dengan 50+ pilihan
+
+| Daftar Kategori                      | Tambah Kategori                                    |
+| ------------------------------------ | -------------------------------------------------- |
+| ![Kategori](assets/img/kategori.png) | ![Tambah Kategori](assets/img/tambah_kategori.png) |
+
+Kelola kategori untuk mengorganisir transaksi Anda dengan ikon dan warna custom.
+
+**📂 Daftar Kategori** - Menampilkan semua kategori yang dibuat:
+
+- Kategori dipisah antara Pemasukan & Pengeluaran
+- Tampilan card dengan ikon dan warna
+- Aksi edit dan hapus untuk setiap kategori
+
+**➕ Tambah Kategori** - Form untuk membuat kategori baru:
+
+- Pilih tipe kategori (Pemasukan/Pengeluaran)
+- Masukkan nama kategori
+- Icon picker dengan 50+ pilihan ikon Bootstrap
+- Color picker untuk memilih warna custom
+
+---
 
 ### 🎯 Wishlist & Target Tabungan
-- Tetapkan target tabungan
-- Progress bar visual
-- Prioritas (Tinggi/Sedang/Rendah)
-- Mark sebagai tercapai
+
+| Daftar Wishlist                      | Tambah Wishlist                                    |
+| ------------------------------------ | -------------------------------------------------- |
+| ![Wishlist](assets/img/wishlist.png) | ![Tambah Wishlist](assets/img/tambah_wishlist.png) |
+
+Fitur untuk menetapkan target tabungan dan memantau progress pencapaiannya.
+
+**🎯 Daftar Wishlist** - Menampilkan semua target tabungan:
+
+- Progress bar visual menunjukkan persentase tercapai
+- Badge prioritas: Tinggi (merah), Sedang (kuning), Rendah (hijau)
+- Status: Aktif atau Tercapai
+- Update jumlah terkumpul dan mark sebagai tercapai
+
+**➕ Tambah Wishlist** - Form untuk membuat target baru:
+
+- Masukkan nama item yang diinginkan
+- Set target jumlah uang yang dibutuhkan
+- Pilih tingkat prioritas (Tinggi/Sedang/Rendah)
+- Opsional: tambahkan catatan
+
+---
 
 ### 🔗 Share Laporan Keuangan
-- Generate link share dengan token unik
-- Set tanggal kadaluarsa
-- Tracking viewer (siapa yang melihat)
-- Bar chart visualisasi di shared report
 
-### 👤 Profil & Akun
-- Update profil (nama, email)
-- Motivational quote berdasarkan tabungan
-- Ganti password dengan validasi
-- **Hapus akun** (menghapus semua data)
+| Manage Share Links                        | Laporan Shared                                 |
+| ----------------------------------------- | ---------------------------------------------- |
+| ![Share Links](assets/img/share_link.png) | ![Laporan Share](assets/img/laporan_share.png) |
 
-### 🔐 Autentikasi
-- Login & Register dengan validasi
-- **Lupa Password** (development mode)
-- Toast notifications untuk feedback
-- Password hashing dengan bcrypt
+Bagikan laporan keuangan Anda dengan orang lain melalui link unik.
 
-### 📱 Fully Responsive
-- Optimized untuk desktop, tablet, dan mobile
-- Bottom navigation untuk mobile
-- Collapsible sidebar untuk desktop
+**🔗 Manage Share Links** - Kelola semua link share yang dibuat:
+
+- Buat link baru dengan judul custom
+- Set tanggal kadaluarsa (opsional)
+- Copy link untuk dibagikan
+- Lihat siapa saja yang sudah melihat (viewer tracking)
+- Hapus link yang tidak dibutuhkan
+
+**📊 Laporan Shared** - Tampilan publik yang dilihat penerima link:
+
+- Ringkasan total pemasukan dan pengeluaran
+- Bar chart visualisasi perbandingan
+- Daftar transaksi dalam periode tertentu
+- Tidak memerlukan login untuk melihat
+
+---
+
+### 👤 Profil & Pengaturan Akun
+
+![Profile](assets/img/profile.png)
+
+Halaman untuk mengelola profil dan pengaturan akun pengguna.
+
+**Fitur halaman ini:**
+
+- ✅ **Update Profil** - Ubah nama dan email
+- ✅ **Motivational Quote** - Quote inspirasi berdasarkan total tabungan
+- ✅ **Statistik Akun** - Jumlah transaksi, kategori, dan wishlist
+- ✅ **Ganti Password** - Form untuk mengubah password dengan validasi
+- ✅ **Zona Bahaya** - Hapus akun secara permanen (menghapus semua data)
+
+---
+
+### � Fully Responsive Design
+
+Aplikasi dioptimasi untuk semua ukuran layar:
+
+- ✅ **Desktop** - Sidebar collapsible di sisi kiri
+- ✅ **Tablet** - Layout adaptif dengan sidebar yang bisa di-toggle
+- ✅ **Mobile** - Bottom navigation untuk navigasi yang mudah dijangkau
 
 ---
 
@@ -118,6 +213,7 @@
 ### Langkah Instalasi
 
 1. **Clone/Download ke folder htdocs**
+
    ```bash
    cd C:/xampp/htdocs
    git clone [repository-url] tabungan
@@ -125,18 +221,21 @@
    ```
 
 2. **Buat database dan import schema**
+
    - Buka phpMyAdmin: http://localhost/phpmyadmin
    - Buat database baru: `tabungan`
    - Import file `database.sql`
-   
+
    **Atau via command line:**
+
    ```bash
    mysql -u root -p tabungan < database.sql
    ```
 
 3. **Konfigurasi database** (opsional)
-   
+
    Edit `config/database.php` jika kredensial berbeda:
+
    ```php
    define('DB_HOST', 'localhost');
    define('DB_NAME', 'tabungan');
@@ -145,6 +244,7 @@
    ```
 
 4. **Install dependencies & compile Tailwind CSS**
+
    ```bash
    cd tabungan
    npm install
@@ -152,12 +252,13 @@
    ```
 
 5. **Akses aplikasi**
-   
+
    Buka browser: http://localhost/tabungan
 
 ### Development Mode
 
 Jalankan Tailwind CSS watcher untuk auto-compile saat edit:
+
 ```bash
 npm run dev
 ```
@@ -167,40 +268,47 @@ npm run dev
 ## 📖 Panduan Penggunaan
 
 ### 1. Registrasi Akun
+
 - Buka http://localhost/tabungan
 - Klik "Mulai Sekarang" atau "Daftar"
 - Isi nama, email, dan password (min. 6 karakter)
 - Setujui Terms & Privacy Policy
 
 ### 2. Menambah Kategori
+
 - Masuk ke menu **Kategori**
 - Klik "Tambah Kategori"
 - Pilih tipe (Pemasukan/Pengeluaran)
 - Pilih nama, ikon, dan warna
 
 ### 3. Mencatat Transaksi
+
 - Masuk ke menu **Transaksi**
 - Klik "Tambah Transaksi"
 - Pilih tipe, kategori, jumlah, tanggal, dan keterangan
 
 ### 4. Membuat Wishlist
+
 - Masuk ke menu **Wishlist**
 - Klik "Tambah Wishlist"
 - Isi nama item, target uang, dan prioritas
 - Update progress saat menabung
 
 ### 5. Share Laporan
+
 - Masuk ke menu **Share**
 - Klik "Buat Link Share"
 - Set judul dan tanggal kadaluarsa (opsional)
 - Copy link dan bagikan
 
 ### 6. Lupa Password
+
 - Di halaman login, klik "Lupa password?"
 - Masukkan email terdaftar
 - (Development mode: langsung set password baru)
 
 ### 7. Hapus Akun
+
 - Masuk ke **Profil** → Tab "Zona Bahaya"
 - Masukkan password untuk konfirmasi
 - Klik "Hapus Akun" (PERMANEN!)
@@ -209,16 +317,16 @@ npm run dev
 
 ## 🛠️ Tech Stack
 
-| Komponen | Teknologi | Versi |
-|----------|-----------|-------|
-| Backend | PHP Native (PDO) | 8.0+ |
-| Database | MySQL | 5.7+ |
-| CSS Framework | Tailwind CSS | 3.4+ |
-| JavaScript | Vanilla JS (ES6+) | - |
-| Charts | Chart.js | 4.0+ |
-| Icons | Bootstrap Icons | 1.11+ |
-| Fonts | Google Fonts (Outfit) | - |
-| Build Tool | PostCSS + Tailwind CLI | - |
+| Komponen      | Teknologi              | Versi |
+| ------------- | ---------------------- | ----- |
+| Backend       | PHP Native (PDO)       | 8.0+  |
+| Database      | MySQL                  | 5.7+  |
+| CSS Framework | Tailwind CSS           | 3.4+  |
+| JavaScript    | Vanilla JS (ES6+)      | -     |
+| Charts        | Chart.js               | 4.0+  |
+| Icons         | Bootstrap Icons        | 1.11+ |
+| Fonts         | Google Fonts (Outfit)  | -     |
+| Build Tool    | PostCSS + Tailwind CLI | -     |
 
 ---
 
@@ -273,14 +381,14 @@ tabungan/
 
 ### Tables
 
-| Table | Deskripsi |
-|-------|-----------|
-| `pengguna` | Data user (id, nama, email, password, created_at) |
-| `kategori` | Kategori transaksi (id, nama, tipe, ikon, warna, id_pengguna) |
-| `transaksi` | Data transaksi (id, jumlah, tanggal, keterangan, id_kategori, id_pengguna) |
-| `wishlist` | Target tabungan (id, nama, target, terkumpul, prioritas, status, id_pengguna) |
-| `share_token` | Share links (id, token, title, expires_at, id_pengguna) |
-| `share_viewers` | Viewer tracking (id, id_share, id_pengguna, viewed_at) |
+| Table           | Deskripsi                                                                     |
+| --------------- | ----------------------------------------------------------------------------- |
+| `pengguna`      | Data user (id, nama, email, password, created_at)                             |
+| `kategori`      | Kategori transaksi (id, nama, tipe, ikon, warna, id_pengguna)                 |
+| `transaksi`     | Data transaksi (id, jumlah, tanggal, keterangan, id_kategori, id_pengguna)    |
+| `wishlist`      | Target tabungan (id, nama, target, terkumpul, prioritas, status, id_pengguna) |
+| `share_token`   | Share links (id, token, title, expires_at, id_pengguna)                       |
+| `share_viewers` | Viewer tracking (id, id_share, id_pengguna, viewed_at)                        |
 
 ---
 
@@ -315,7 +423,7 @@ Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 
-**Izzat Fakhar Assyakur**
+**Izzat Fakhar Assyakur -221011400803 - 07TPLP020**
 
 - GitHub: [@ijatt19](https://github.com/ijatt19)
 - Dibuat sebagai proyek pembelajaran PHP & Web Development
@@ -324,7 +432,8 @@ Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
 <div align="center">
 
+**Dibuat Untuk Memenuhi Tugas Pemrograman Web 2**
 
-© 2025 MyTabungan. Izzat Fakhar Assyakur - 221011400803.
+© 2024 MyTabungan. All rights reserved.
 
 </div>
