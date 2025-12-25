@@ -2,7 +2,6 @@
 
 <div align="center">
 
-![MyTabungan Logo](https://via.placeholder.com/120x120/10b981/ffffff?text=MT)
 
 **Kelola Keuangan Anda dengan Mudah dan Modern**
 
@@ -400,24 +399,6 @@ tabungan/
 - ✅ Session-based authentication
 - ✅ CSRF protection pada forms
 - ✅ Validasi input (email, password length)
-
----
-
-## 🤝 Kontribusi
-
-Kontribusi sangat diterima! Silakan:
-
-1. Fork repository ini
-2. Buat branch fitur (`git checkout -b fitur-baru`)
-3. Commit perubahan (`git commit -m 'Tambah fitur baru'`)
-4. Push ke branch (`git push origin fitur-baru`)
-5. Buat Pull Request
-
----
-
-## 📄 Lisensi
-
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
 ---
 
